@@ -35,9 +35,10 @@ while k:
         elif event.type == pygame.KEYDOWN and a == False and b == True:
             screen.fill((0,0,0))
             reaction_time = pygame.time.get_ticks()
-            print('\n' + f'tempo de reação: {reaction_time}' + '\n')
+            time_sec = float(reaction_time)/10000
+            print('\n' + f'tempo de reação: {time_sec} s' + '\n')
             font = pygame.font.SysFont(None, 30)
-            img = font.render(f'tempo de reação: {reaction_time}', True, (255,255,255))
+            img = font.render(f'tempo de reação: {time_sec} s', True, (255,255,255))
             screen.blit(img, (20, 20))
             a = True
             b = False
