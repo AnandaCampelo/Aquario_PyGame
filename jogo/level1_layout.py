@@ -7,7 +7,7 @@ level_01 = [
 'XXXXX           XX        XX              XX   ',
 'XXXXXXX        XXXX      XXXX   XXXXX   XXXX   ',
 'XXXXXXX        XXXX                            ',
-'           XX  X       X  XXX       XXXXXXXXXXX',
+'P          XX  X       X  XXX       XXXXXXXXXXX',
 'XXXXXXXX XXXX  XXXXXXXXX  XXXXXXXXXXXXXXXXXXXXX',
 ]
 
