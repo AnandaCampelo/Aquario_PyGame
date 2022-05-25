@@ -34,9 +34,16 @@ class Player(pygame.sprite.Sprite):
             self.direction.x = -1
         else:
             self.direction.x = 0
+
+        if keys[pygame.K_UP] or keys[pygame.K_SPACE]:
+            self.pulo()
     
-    def gravidade()
+    def gravidade(self):
+        self.direction.y += self.gravity
+        self.rect.y += self.direction.y
+
+    def pulo(self):
+        self.direction.y = self.jump_speed
 
     def update(self):
         self.get_input()
-        self.rect.x += self.direction.x * self.speed
