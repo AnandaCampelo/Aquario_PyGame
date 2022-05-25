@@ -1,5 +1,5 @@
 import pygame, sys
-from level1_layout import *
+from level_layout import *
 from classes import Tile
 from levels import Level
 

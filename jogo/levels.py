@@ -1,7 +1,7 @@
 import pygame
 from classes import Player
 from classes import Tile
-from level1_layout import tile_size, screen_width
+from level_layout import tile_size, screen_width
 
 class Level:
     def __init__(self, level_data, surface):

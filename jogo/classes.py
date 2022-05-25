@@ -1,4 +1,5 @@
 import pygame
+from animations import import_folder
 
 #classe para os blocos
 class Tile(pygame.sprite.Sprite):
@@ -14,9 +15,11 @@ class Tile(pygame.sprite.Sprite):
 #classe para o jogador
 class Player(pygame.sprite.Sprite):
     def __init__(self, pos):
+        self.import_character_animation()
+        self.frame_index = 0
+        self.animation_speed = 0.15
         super().__init__()
-        self.image = pygame.Surface((32,64))
-        self.image.fill('green')
+        self.image = self.animations['idle'][self.frame_index]
         self.rect = self.image.get_rect(topleft = pos)
 
         # movimento do player
@@ -24,6 +27,14 @@ class Player(pygame.sprite.Sprite):
         self.speed = 5
         self.gravity = 0.8
         self.jump_speed = -10
+
+    def import_character_animation(self):
+        character_path = r'../graficos/player/'
+        self.animations = {'idle': [], 'andar': [], 'pulo': [], 'cair': []}
+
+        for animation in self.animations.keys():
+            full_path = character_path + animation
+            self.animations[animation] = import_folder(full_path)
 
     def get_input(self):
         keys = pygame.key.get_pressed()
