@@ -173,3 +173,21 @@ class Game:
 
                         if event.key == K_DOWN:
                             self.snake.move_down()
+                
+                elif event.type == QUIT:
+                    running = False
+            try:
+
+                if not pause:
+                    self.play()
+
+            except Exception as e:
+                self.show_game_over()
+                pause = True
+                self.reset()
+
+            time.sleep(.25)
+
+if __name__ == '__main__':
+    game = Game()
+    game.run()
