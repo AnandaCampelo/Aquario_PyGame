@@ -6,6 +6,7 @@ window = pygame.display.set_mode((1000,600))
 
 pygame.font.init()
 font = pygame.font.SysFont('Courier New', 50)
+clock = pygame.time.Clock()
 font_dica = pygame.font.SysFont('Courier New', 30)
 
 dicas = []
@@ -42,6 +43,7 @@ def desenho(window, chances):
         pygame.draw.line(window, (0,0,0), (300,340), (225,415), 10)
     if chances >= 6:
         pygame.draw.line(window, (0,0,0), (300,340), (375,415), 10)
+        pygame.draw.line(window, (255,0,0), (200,250), (400,250), 10)
 
 def esconde_palavra(palavra,tentativas):
     palavra_escondida = palavra
@@ -75,6 +77,5 @@ while True:
     palavra_escondida = esconde_palavra(palavra,tentativas)
     tentativas, chances = tentar_letra(tentativas, palavra, letra, chances)
     jogo(window,palavra_escondida)
-    #desenho(window,chances)
 
     pygame.display.update()
