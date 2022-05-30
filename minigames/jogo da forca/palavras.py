@@ -1,3 +1,3 @@
 dic = {'animal': ['golfinho','rinoceronte', 'salamandra', 'javali', 'cutia', 'joaninha'],
-    'roupa': ['cropped','blazer', 'cachecol'],
-    'comida': ['açafrão', 'bacalhau', 'churrasco', 'nhoque']}
+    'roupa': ['cropped','blazer', 'cachecol', 'colete'],
+    'comida': ['acaraje','pamonha', 'bacalhau', 'churrasco', 'nhoque']}
