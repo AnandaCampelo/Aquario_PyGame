@@ -146,3 +146,30 @@ class Game:
         self.surface.blit(line2, (200, 350))
         pygame.mixer.music.pause()
         pygame.display.flip()
+
+    def run(self):
+        running = True
+        pause = False
+
+        while running:
+            for event in pygame.event.get():
+                if event.type == KEYDOWN:
+                    if event.key == K_ESCAPE:
+                        running = False
+
+                    if event.key == K_RETURN:
+                        pygame.mixer.music.unpause()
+                        pause = False
+
+                    if not pause:
+                        if event.key == K_LEFT:
+                            self.snake.move_left()
+
+                        if event.key == K_RIGHT:
+                            self.snake.move_right()
+
+                        if event.key == K_UP:
+                            self.snake.move_up()
+
+                        if event.key == K_DOWN:
+                            self.snake.move_down()
