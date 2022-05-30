@@ -119,3 +119,30 @@ class Game:
         self.apple.draw()
         self.display_score()
         pygame.display.flip()
+
+        # snake eating apple scenario
+        if self.is_collision(self.snake.x[0], self.snake.y[0], self.apple.x, self.apple.y):
+            self.play_sound("ding")
+            self.snake.increase_length()
+            self.apple.move()
+
+        # snake colliding with itself
+        for i in range(3, self.snake.length):
+            if self.is_collision(self.snake.x[0], self.snake.y[0], self.snake.x[i], self.snake.y[i]):
+                self.play_sound('crash')
+                raise "Collision Occurred"
+
+    def display_score(self):
+        font = pygame.font.SysFont('arial',30)
+        score = font.render(f"Score: {self.snake.length}",True,(200,200,200))
+        self.surface.blit(score,(850,10))
+
+    def show_game_over(self):
+        self.render_background()
+        font = pygame.font.SysFont('arial', 30)
+        line1 = font.render(f"Game is over! Your score is {self.snake.length}", True, (255, 255, 255))
+        self.surface.blit(line1, (200, 300))
+        line2 = font.render("To play again press Enter. To exit press Escape!", True, (255, 255, 255))
+        self.surface.blit(line2, (200, 350))
+        pygame.mixer.music.pause()
+        pygame.display.flip()
