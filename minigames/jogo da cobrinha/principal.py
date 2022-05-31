@@ -3,8 +3,7 @@ from pygame.locals import *
 import time
 import random
 
-SIZE = 40
-BACKGROUND_COLOR = (110, 110, 5)
+tamanho = 40
 
 class Apple:
     def __init__(self, parent_screen):
@@ -18,8 +17,8 @@ class Apple:
         pygame.display.flip()
 
     def move(self):
-        self.x = random.randint(1,24)*SIZE
-        self.y = random.randint(1,19)*SIZE
+        self.x = random.randint(1,24)*tamanho
+        self.y = random.randint(1,19)*tamanho
 
 
 class Snake:
@@ -52,13 +51,13 @@ class Snake:
 
         # update head
         if self.direction == 'left':
-            self.x[0] -= SIZE
+            self.x[0] -= tamanho
         if self.direction == 'right':
-            self.x[0] += SIZE
+            self.x[0] += tamanho
         if self.direction == 'up':
-            self.y[0] -= SIZE
+            self.y[0] -= tamanho
         if self.direction == 'down':
-            self.y[0] += SIZE
+            self.y[0] += tamanho
 
         self.draw()
     
@@ -104,8 +103,8 @@ class Game:
         self.apple = Apple(self.surface)
 
     def is_collision(self, x1, y1, x2, y2):
-        if x1 >= x2 and x1 < x2 + SIZE:
-            if y1 >= y2 and y1 < y2 + SIZE:
+        if x1 >= x2 and x1 < x2 + tamanho:
+            if y1 >= y2 and y1 < y2 + tamanho:
                 return True
         return False
 
@@ -134,15 +133,15 @@ class Game:
 
     def display_score(self):
         font = pygame.font.SysFont('arial',30)
-        score = font.render(f"Score: {self.snake.length}",True,(200,200,200))
+        score = font.render(f"Pontos: {self.snake.length}",True,(200,200,200))
         self.surface.blit(score,(850,10))
 
     def show_game_over(self):
         self.render_background()
         font = pygame.font.SysFont('arial', 30)
-        line1 = font.render(f"Game is over! Your score is {self.snake.length}", True, (255, 255, 255))
+        line1 = font.render(f"Você perdeu! Pontuação total: {self.snake.length}", True, (255, 255, 255))
         self.surface.blit(line1, (200, 300))
-        line2 = font.render("To play again press Enter. To exit press Escape!", True, (255, 255, 255))
+        line2 = font.render("Quer ir de novo? Aperte Enter. Para sair, aperte Escape!", True, (255, 255, 255))
         self.surface.blit(line2, (200, 350))
         pygame.mixer.music.pause()
         pygame.display.flip()
