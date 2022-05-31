@@ -24,7 +24,7 @@ class Player(pygame.sprite.Sprite):
 
         # movimento do player
         self.direction = pygame.math.Vector2(0,0)
-        self.speed = 5
+        self.speed = 3
         self.gravity = 0.8
         self.jump_speed = -10
 
@@ -35,6 +35,15 @@ class Player(pygame.sprite.Sprite):
         for animation in self.animations.keys():
             full_path = character_path + animation
             self.animations[animation] = import_folder(full_path)
+
+    def animate(self):
+        animation = self.animations['idle']
+        self.frame_index += self.animation_speed
+
+        if self.frame_index >= len(animation):
+            self.frame_index = 0
+        
+        self.image = animation[int(self.frame_index)]
 
     def get_input(self):
         keys = pygame.key.get_pressed()
@@ -58,3 +67,4 @@ class Player(pygame.sprite.Sprite):
 
     def update(self):
         self.get_input()
+        self.animate()
