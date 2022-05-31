@@ -9,7 +9,7 @@ BACKGROUND_COLOR = (110, 110, 5)
 class Apple:
     def __init__(self, parent_screen):
         self.parent_screen = parent_screen
-        self.image = pygame.image.load("apple.jpg").convert()
+        self.image = pygame.image.load("jogo da cobrinha/apple.jpg").convert()
         self.x = 120
         self.y = 120
 
@@ -25,7 +25,7 @@ class Apple:
 class Snake:
     def __init__(self, parent_screen):
         self.parent_screen = parent_screen
-        self.image = pygame.image.load("block-1.jpg").convert()
+        self.image = pygame.image.load("jogo da cobrinha/block-1.jpg").convert()
         self.direction = 'down'
 
         self.length = 1
@@ -88,14 +88,14 @@ class Game:
         self.apple.draw()
 
     def play_background_music(self):
-        pygame.mixer.music.load('music.mp3')
+        pygame.mixer.music.load('jogo da cobrinha/music.mp3')
         pygame.mixer.music.play(-1, 0)
 
     def play_sound(self, sound_name):
         if sound_name == "crash":
-            sound = pygame.mixer.Sound("crash.mp3")
+            sound = pygame.mixer.Sound("jogo da cobrinha/crash.mp3")
         elif sound_name == 'ding':
-            sound = pygame.mixer.Sound("ding.mp3")
+            sound = pygame.mixer.Sound("jogo da cobrinha/ding.mp3")
 
         pygame.mixer.Sound.play(sound)
 
@@ -110,7 +110,7 @@ class Game:
         return False
 
     def render_background(self):
-        bg = pygame.image.load("background.jpg")
+        bg = pygame.image.load("jogo da cobrinha/background.jpg")
         self.surface.blit(bg, (0,0))
 
     def play(self):
