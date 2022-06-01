@@ -19,7 +19,8 @@ class Player(pygame.sprite.Sprite):
         self.frame_index = 0
         self.animation_speed = 0.15
         super().__init__()
-        self.image = self.animations['idle'][self.frame_index]
+        idle = self.animations['idle']
+        self.image = idle[self.frame_index]
         self.rect = self.image.get_rect(topleft = pos)
 
         # movimento do player
@@ -29,7 +30,7 @@ class Player(pygame.sprite.Sprite):
         self.jump_speed = -10
 
     def import_character_animation(self):
-        character_path = r'../graficos/player/'
+        character_path = r'./graficos/player/'
         self.animations = {'idle': [], 'andar': [], 'pulo': [], 'cair': []}
 
         for animation in self.animations.keys():
