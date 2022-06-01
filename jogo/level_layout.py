@@ -2,13 +2,13 @@ level_01 = [
 '                                             XX',
 '                            X                XX',
 '     XXX      X        XXXXXXXX     XXXXXXXXXXX',
-'XXX         XXXXXXX    XXXXXXXXXXXXXXX         ',
+'            XXXXXXXXX  XXXXXXXXXXXXXXX         ',
 'XX              XX                           XX',
-'XX              XX       XXXX           XXXXXXX',
-'XXXXXXX        XXXX            XX             ',
-'               XX                              ',
+'XXX             XX       XXXX           XXXXXXX',
+'XXXXXX          XXXX            XX             ',
+'            X  XX                              ',
 'P          XX  XX      X  XXX       XXXXXXXXXXX',
-'XXXXXXXX XXXX  XXXXXXXXX  XXXXXXXXXXXXXXXXXXXXX',
+'XXXXXXXX  XXX  XXXXXXXXX  XXXXXXXXXXXXXXXXXXXXX',
 ]
 
 tile_size = 64
