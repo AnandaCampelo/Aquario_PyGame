@@ -10,7 +10,7 @@ class Apple:
         self.parent_screen = parent_screen
         self.image = pygame.image.load("apple.jpg").convert()
         self.x = 120
-        self.y = 120
+        self.y = 100
 
     def draw(self):
         self.parent_screen.blit(self.image, (self.x, self.y))
