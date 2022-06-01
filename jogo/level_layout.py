@@ -4,9 +4,9 @@ level_01 = [
 '     XXX      X        XXXXXXXX     XXXXXXXXXXX',
 '            XXXXXXXXX  XXXXXXXXXXXXXXX         ',
 'XX              XX                           XX',
-'XXX             XX       XXXX           XXXXXXX',
+'XXX             XX                      XXXXXX',
 'XXXXXX          XXXX            XX             ',
-'            X  XX                              ',
+'            X  XX         XXX                  ',
 'P        XXXX  XX      X  XXX       XXXXXXXXXXX',
 'XXXXXXXXXXXXX  XXXXXXXXX  XXXXXXXXXXXXXXXXXXXXX',
 ]
