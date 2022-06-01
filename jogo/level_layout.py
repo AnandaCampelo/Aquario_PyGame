@@ -7,8 +7,8 @@ level_01 = [
 'XXX             XX       XXXX           XXXXXXX',
 'XXXXXX          XXXX            XX             ',
 '            X  XX                              ',
-'P          XX  XX      X  XXX       XXXXXXXXXXX',
-'XXXXXXXX  XXX  XXXXXXXXX  XXXXXXXXXXXXXXXXXXXXX',
+'P        XXXX  XX      X  XXX       XXXXXXXXXXX',
+'XXXXXXXXXXXXX  XXXXXXXXX  XXXXXXXXXXXXXXXXXXXXX',
 ]
 
 tile_size = 64
