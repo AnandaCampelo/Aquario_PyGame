@@ -29,6 +29,14 @@ class Player(pygame.sprite.Sprite):
         self.gravity = 0.8
         self.jump_speed = -10
 
+        # estado do jogador
+        self.status = 'idle'
+        self.olhando_frente = True
+        self.on_ground = False
+        self.on_celling = False
+        self.on_right = False
+        self.on_left = False
+
     def import_character_animation(self):
         character_path = r'./graficos/player/'
         self.animations = {'idle': [], 'andar': [], 'pulo': [], 'cair': []}
@@ -38,27 +46,45 @@ class Player(pygame.sprite.Sprite):
             self.animations[animation] = import_folder(full_path)
 
     def animate(self):
-        animation = self.animations['idle']
+        animation = self.animations[self.status]
         self.frame_index += self.animation_speed
 
         if self.frame_index >= len(animation):
             self.frame_index = 0
         
-        self.image = animation[int(self.frame_index)]
+        image = animation[int(self.frame_index)]
+        if self.olhando_frente:
+            self.image = image
+        else:
+            virar_jogador = pygame.transform.flip(image,True,False)
+            self.image = virar_jogador
 
     def get_input(self):
         keys = pygame.key.get_pressed()
 
         if keys[pygame.K_RIGHT]:
             self.direction.x = 1
+            self.olhando_frente = True
         elif keys[pygame.K_LEFT]:
             self.direction.x = -1
+            self.olhando_frente = False
         else:
             self.direction.x = 0
 
         if keys[pygame.K_UP] or keys[pygame.K_SPACE]:
             self.pulo()
     
+    def get_status(self):
+        if self.direction.y < 0:
+            self.status = 'pulo'
+        elif self.direction.y > 1:
+            self.status = 'cair'
+        else:
+            if self.direction.x != 0:
+                self.status = 'andar'
+            else:
+                self.status = 'idle'
+
     def gravidade(self):
         self.direction.y += self.gravity
         self.rect.y += self.direction.y
@@ -68,4 +94,5 @@ class Player(pygame.sprite.Sprite):
 
     def update(self):
         self.get_input()
+        self.get_status()
         self.animate()
