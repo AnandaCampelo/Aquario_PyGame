@@ -42,4 +42,23 @@ class Square(p.sprite.Sprite):
                     self.image = p.transform.scale(self.image, (self.width, self.height))
                     turn = 'x'
                     checkWinner('o')
+    
+def checkWinner(player):
+    global background, won, startX, startY, endX, endY
+
+    for i in range(8):
+        if board[winners[i][0]] == player and board[winners[i][1]] == player and board[winners[i][2]] == player:
+            won = True
+            getPos(winners[i][0], winners[i][2])
+            break
+
+    if won:
+        Update()
+        drawLine(startX, startY, endX, endY)
+
+        square_group.empty()
+        background = p.image.load(player.upper() + ' Wins.png')
+        background = p.transform.scale(background, (WIDTH, HEIGHT))
+
+
 
