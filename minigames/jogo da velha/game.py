@@ -60,5 +60,21 @@ def checkWinner(player):
         background = p.image.load(player.upper() + ' Wins.png')
         background = p.transform.scale(background, (WIDTH, HEIGHT))
 
+def Winner(player):
+    global compMove, move
+
+    for i in range(8):
+        if board[winners[i][0]] == player and board[winners[i][1]] == player and board[winners[i][2]] == '':
+            compMove = winners[i][2]
+            move = False
+
+        elif board[winners[i][0]] == player and board[winners[i][1]] == '' and board[winners[i][2]] == player:
+            compMove = winners[i][1]
+            move = False
+
+        elif board[winners[i][0]] == '' and board[winners[i][1]] == player and board[winners[i][2]] == player:
+            compMove = winners[i][0]
+            move = False
+
 
 
