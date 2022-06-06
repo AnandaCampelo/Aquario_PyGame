@@ -149,3 +149,31 @@ def checkDangerPos():
     elif board == dangerPos9:
         compMove = 9
         move = False
+
+def checkCentre():
+    global compMove, move
+
+    if board[5] == '':
+        compMove = 5
+        move = False
+
+
+def checkCorner():
+    global compMove, move
+
+    for i in range(1, 11, 2):
+        if i != 5:
+            if board[i] == '':
+                compMove = i
+                move = False
+                break
+
+
+def checkEdge():
+    global compMove, move
+
+    for i in range(2, 10, 2):
+        if board[i] == '':
+            compMove = i
+            move = False
+            break
