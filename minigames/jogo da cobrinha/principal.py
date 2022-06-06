@@ -17,8 +17,8 @@ class Apple:
         pygame.display.flip()
 
     def move(self):
-        self.x = random.randint(1,24)*tamanho
-        self.y = random.randint(1,19)*tamanho
+        self.x = random.randint(1,25)*tamanho
+        self.y = random.randint(1,15)*tamanho
 
 
 class Snake:
@@ -185,7 +185,7 @@ class Game:
                 pause = True
                 self.reset()
 
-            time.sleep(.25)
+            time.sleep(.10)
 
 if __name__ == '__main__':
     game = Game()
