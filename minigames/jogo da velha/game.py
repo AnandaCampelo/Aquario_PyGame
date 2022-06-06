@@ -76,5 +76,38 @@ def Winner(player):
             compMove = winners[i][0]
             move = False
 
+def CompMove():
+    global move, background
 
+    move = True
+
+    if move:
+        Winner('o')
+
+    if move:
+        Winner('x')
+
+    if move:
+        checkDangerPos()
+
+    if move:
+        checkCentre()
+
+    if move:
+        checkCorner()
+
+    if move:
+        checkEdge()
+
+    if not move:
+        for square in squares:
+            if square.number == compMove:
+                square.clicked(square.x, square.y)
+
+    else:
+        Update()
+        time.sleep(1)
+        square_group.empty()
+        background = p.image.load('Tie Game.png')
+        background = p.transform.scale(background, (WIDTH, HEIGHT))
 
