@@ -111,3 +111,41 @@ def CompMove():
         background = p.image.load('Tie Game.png')
         background = p.transform.scale(background, (WIDTH, HEIGHT))
 
+def checkDangerPos():
+    global move, compMove
+
+    if board == dangerPos1:
+        compMove = 2
+        move = False
+
+    elif board == dangerPos2:
+        compMove = 4
+        move = False
+
+    elif board == dangerPos3:
+        compMove = 1
+        move = False
+
+    elif board == dangerPos4:
+        compMove = 4
+        move = False
+
+    elif board == dangerPos5:
+        compMove = 7
+        move = False
+
+    elif board == dangerPos6:
+        compMove = 9
+        move = False
+
+    elif board == dangerPos7:
+        compMove = 9
+        move = False
+
+    elif board == dangerPos8:
+        compMove = 7
+        move = False
+
+    elif board == dangerPos9:
+        compMove = 9
+        move = False
