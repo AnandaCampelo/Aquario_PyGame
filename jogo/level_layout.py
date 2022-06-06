@@ -1,8 +1,8 @@
 level_01 = [
 '                                             XX',
 '                            X                XX',
-'     XXXX     X        XXXXXXXX     XXXXXXXXXXX',
-'            XXXXXXXXX  XXXXXXXXXXXXXXX         ',
+'     XXXX     X         XXXXXXX     XXXXXXXXXXX',
+'            XXXXXXXXX   XXXXXXXXXXXXXX         ',
 'XX              XX                           XX',
 'XXX             XX                      XXXXXXX',
 'XXXXXX          XXXX            XX             ',
