@@ -1,10 +1,10 @@
 level_01 = [
 '                                             XX',
 '                            X                XX',
-'     XXX      X        XXXXXXXX     XXXXXXXXXXX',
+'     XXXX     X        XXXXXXXX     XXXXXXXXXXX',
 '            XXXXXXXXX  XXXXXXXXXXXXXXX         ',
 'XX              XX                           XX',
-'XXX             XX       XXXX           XXXXXXX',
+'XXX             XX         XX           XXXXXXX',
 'XXXXXX          XXXX            XX             ',
 '            X  XX                              ',
 'P        XXXX  XX      X  XXX       XXXXXXXXXXX',

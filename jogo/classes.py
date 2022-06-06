@@ -27,7 +27,7 @@ class Player(pygame.sprite.Sprite):
         self.direction = pygame.math.Vector2(0,0)
         self.speed = 3
         self.gravity = 0.8
-        self.jump_speed = -10
+        self.jump_speed = -20
 
         # estado do jogador
         self.status = 'idle'
@@ -59,6 +59,19 @@ class Player(pygame.sprite.Sprite):
             virar_jogador = pygame.transform.flip(image,True,False)
             self.image = virar_jogador
 
+        if self.on_ground and self.on_right:
+            self.rect = self.image.get_rect(bottomright = self.rect.bottomright)
+        elif self.on_ground and self.on_left:
+            self.rect = self.image.get_rect(bottomleft = self.rect.bottomleft)
+        elif self.on_ground:
+            self.rect = self.image.get_rect(midbottom = self.rect.midbottom)
+        elif self.on_celling and self.on_right:
+            self.rect = self.image.get_rect(topright = self.rect.topright)
+        elif self.on_celling and self.on_left:
+            self.rect = self.image.get_rect(topleft = self.rect.topleft)
+        elif self.on_celling:
+            self.rect = self.image.get_rect(midtop = self.rect.midtop)
+
     def get_input(self):
         keys = pygame.key.get_pressed()
 
@@ -71,7 +84,7 @@ class Player(pygame.sprite.Sprite):
         else:
             self.direction.x = 0
 
-        if keys[pygame.K_UP] or keys[pygame.K_SPACE]:
+        if keys[pygame.K_UP]  and self.on_ground:
             self.pulo()
     
     def get_status(self):
