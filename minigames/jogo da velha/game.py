@@ -226,3 +226,42 @@ squares = []
 
 winners = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7]]
 board = ['' for i in range(10)]
+
+dangerPos1 = ['', 'x', '', '', '', 'o', '', '', '', 'x']
+dangerPos2 = ['', '', '', 'x', '', 'o', '', 'x', '', '']
+dangerPos3 = ['', '', '', 'x', 'x', 'o', '', '', '', '']
+dangerPos4 = ['', 'x', '', '', '', 'o', 'x', '', '', '']
+dangerPos5 = ['', '', '', '', 'x', 'o', '', '', '', 'x']
+dangerPos6 = ['', '', '', '', '', 'o', 'x', 'x', '', '']
+dangerPos7 = ['', '', '', '', '', 'o', 'x', '', 'x', '']
+dangerPos8 = ['', 'x', '', '', '', 'o', '', '', 'x', '']
+dangerPos9 = ['', '', '', 'x', '', 'o', '', '', 'x', '']
+
+startX = 0
+startY = 0
+endX = 0
+endY = 0
+
+num = 1
+for y in range(1, 4):
+    for x in range(1, 4):
+        sq = Square(x, y, num)
+        square_group.add(sq)
+        squares.append(sq)
+
+        num += 1
+
+turn = 'x'
+run = True
+while run:
+    clock.tick(60)
+    for event in p.event.get():
+        if event.type == p.QUIT:
+            run = False
+
+        if event.type == p.MOUSEBUTTONDOWN and turn == 'x':
+            mx, my = p.mouse.get_pos()
+            for s in squares:
+                s.clicked(mx, my)
+
+    Update()
