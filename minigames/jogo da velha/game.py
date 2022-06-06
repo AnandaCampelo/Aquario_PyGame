@@ -202,3 +202,27 @@ def Update():
     square_group.draw(win)
     square_group.update()
     p.display.update()
+
+WIDTH = 500
+HEIGHT = 500
+
+win = p.display.set_mode((WIDTH, HEIGHT))
+p.display.set_caption('Tic Tac Toe')
+clock = p.time.Clock()
+
+blank_image = p.image.load('Blank.png')
+x_image = p.image.load('x.png')
+o_image = p.image.load('o.png')
+background = p.image.load('Background.png')
+
+background = p.transform.scale(background, (WIDTH, HEIGHT))
+
+move = True
+won = False
+compMove = 5
+
+square_group = p.sprite.Group()
+squares = []
+
+winners = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7]]
+board = ['' for i in range(10)]
