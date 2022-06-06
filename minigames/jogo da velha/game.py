@@ -1,27 +1,45 @@
-import pygame, sys 
+import pygame as p
+import time
 
-pygame.init()
+p.init()
 
-c = 600
-h = 600
-c_linha = 15
 
-vermelho = (255,0,0)
-fundo = (28,170,156)
-linha = (23,145,135)
+class Square(p.sprite.Sprite):
+    def __init__(self, x_id, y_id, number):
+        super().__init__()
+        self.width = 120
+        self.height = 120
+        self.x = x_id * self.width
+        self.y = y_id * self.height
+        self.content = ''
+        self.number = number
+        self.image = blank_image
+        self.image = p.transform.scale(self.image, (self.width, self.height))
+        self.rect = self.image.get_rect()
 
-tela = pygame.display.set_mode((c,h))
-pygame.display.set_caption('Jogo da Velha')
-tela.fill(fundo)
+    def update(self):
+        self.rect.center = (self.x, self.y)
 
-pygame.draw.line(tela,vermelho,(10,10),(300,300),10)
+    def clicked(self, x_val, y_val):
+        global turn, won
 
-def draw_line():
-    pygame.draw.line()
+        if self.content == '':
+            if self.rect.collidepoint(x_val, y_val):
+                self.content = turn
+                board[self.number] = turn
 
-while True:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            sys.exit()
+                if turn == 'x':
+                    self.image = x_image
+                    self.image = p.transform.scale(self.image, (self.width, self.height))
+                    turn = 'o'
+                    checkWinner('x')
 
-    pygame.display.update()
+                    if not won:
+                        CompMove()
+
+                else:
+                    self.image = o_image
+                    self.image = p.transform.scale(self.image, (self.width, self.height))
+                    turn = 'x'
+                    checkWinner('o')
+
