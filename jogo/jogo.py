@@ -6,11 +6,10 @@ from levels import Level
 '''
 class Game:
     def __init__(self):
-        self.max_level = 3
-        self.overworld = Overworld(0, self.max_level, screen)
+        self.coins = 0
     
     def run(self):
-        self.overworld.run()
+        
 '''
 
 pygame.init()

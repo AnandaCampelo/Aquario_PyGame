@@ -1,7 +1,7 @@
 import pygame
 from classes import Player
 from classes import Tile, StaticTile, AnimatesTile, Enemy, Fundo
-from level_layout import tile_size, screen_width
+from level_layout import tile_size, screen_width, screen_height
 from animations import import_csv_layout, import_cut_graphics
 
 class Level:
@@ -138,6 +138,14 @@ class Level:
             self.world_shift = 0
             player.speed = 3
 
+    def check_death(self):
+        if self.player.sprite.rect.top > screen_height:
+            print('you lose')
+    
+    def check_win(self):
+        if pygame.sprite.spritecollide(self.player.sprite,self.goal,False):
+            print('you win!')
+
     def run(self):
 
         #self.fundo.draw(self.display_surface)
@@ -145,11 +153,11 @@ class Level:
         self.terrain_sprites.draw(self.display_surface)
         self.terrain_sprites.update(self.world_shift)
 
-        self.sign_sprites.update(self.world_shift)
-        self.sign_sprites.draw(self.display_surface)
+        #self.sign_sprites.update(self.world_shift)
+        #self.sign_sprites.draw(self.display_surface)
 
-        self.gold_sprites.update(self.world_shift)
-        self.gold_sprites.draw(self.display_surface)
+        #self.gold_sprites.update(self.world_shift)
+        #self.gold_sprites.draw(self.display_surface)
 
         self.player.update()
         self.movimento_horizontal_colisao()
@@ -159,8 +167,11 @@ class Level:
         self.goal.update(self.world_shift)
         self.goal.draw(self.display_surface)
 
-        self.enemy_sprites.update(self.world_shift)
-        self.enemy_sprites.draw(self.display_surface)
+        #self.enemy_sprites.update(self.world_shift)
+        #self.enemy_sprites.draw(self.display_surface)
+
+        self.check_death()
+        self.check_win()
 
         self.constraint_sprites.update(self.world_shift)
         self.enemy_collision_reverse()
