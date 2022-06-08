@@ -170,6 +170,7 @@ class Fundo:
             y = row * tile_size
             surface.blit(self.fundo,(0,y))
 
+'''
 class Overworld:
     def __init__(self,start_level,max_level,surface):
 
@@ -185,3 +186,4 @@ class Overworld:
 
     def run(self):
         pass
+'''
