@@ -17,7 +17,7 @@ screen_width = 1200
 screen_height = vertical_tile_number * tile_size
 
 level_0 = {
-    'terreno' : './graficos/level0/level 0 layout_Camada de Tiles 1.csv',
+    'terreno' : './graficos/level0/level 0 layout_terreno.csv',
     'constraint' : './graficos/level0/level 0 layout_constraint.csv',
     'enemy' : './graficos/level0/level 0 layout_enemy.csv',
     'ouro' : './graficos/level0/level 0 layout_ouro.csv',

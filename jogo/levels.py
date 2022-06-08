@@ -122,6 +122,22 @@ class Level:
         if player.on_celling and player.direction.y > 0:
             player.on_celling = False
 
+    def scroll_x(self):
+
+        player = self.player.sprite
+        player_x = player.rect.centerx
+        direction_x = player.direction.x
+
+        if player_x < screen_width / 2 and direction_x < 0:
+            self.world_shift = 4
+            player.speed = 0
+        elif player_x > screen_width / 2 and direction_x > 0:
+            self.world_shift = -4
+            player.speed = 0
+        else:
+            self.world_shift = 0
+            player.speed = 3
+
     def run(self):
 
         self.fundo.draw(self.display_surface)
@@ -138,6 +154,7 @@ class Level:
         self.player.update()
         self.movimento_horizontal_colisao()
         self.movimento_vertical_colisao()
+        self.scroll_x()
         self.player.draw(self.display_surface)
         self.goal.update(self.world_shift)
         self.goal.draw(self.display_surface)

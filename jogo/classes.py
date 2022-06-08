@@ -29,7 +29,7 @@ class Player(pygame.sprite.Sprite):
 
         # movimento do player
         self.direction = pygame.math.Vector2(0,0)
-        self.speed = 3
+        self.speed = 4
         self.gravity = 0.8
         self.jump_speed = -20
 
