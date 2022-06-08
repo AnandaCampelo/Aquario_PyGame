@@ -140,7 +140,7 @@ class Level:
 
     def run(self):
 
-        self.fundo.draw(self.display_surface)
+        #self.fundo.draw(self.display_surface)
 
         self.terrain_sprites.draw(self.display_surface)
         self.terrain_sprites.update(self.world_shift)

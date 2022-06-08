@@ -1,16 +1,3 @@
-level_01 = [
-'                                             XX',
-'                            X                XX',
-'     XXXX     X         XXXXXXX     XXXXXXXXXXX',
-'            XXXXXXXXX   XXXXXXXXXXXXXX         ',
-'XX              XX                           XX',
-'XXX             XX                      XXXXXXX',
-'XXXXXX          XXXX            XX             ',
-'            X   X         XXX                  ',
-'P        XXXX   X      X  XXX       XXXXXXXXXXX',
-'XXXXXXXXXXXXX   XXXXXXXX  XXXXXXXXXXXXXXXXXXXXX',
-]
-
 tile_size = 64
 vertical_tile_number = 11
 screen_width = 1200
@@ -32,4 +19,10 @@ level_1 = {
     'ouro' : './graficos/level1/level 1 layout_ouro.csv',
     'placas' : './graficos/level1/level 1 layout_placas.csv',
     'player' : './graficos/level1/level 1 layout_player.csv'
+}
+
+level_00 = {'node_pos':(110,400),'content': 'this is level 0', 'unlock':1}
+
+levels = {
+    0: level_1
 }
