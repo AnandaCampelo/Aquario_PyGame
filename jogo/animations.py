@@ -3,7 +3,7 @@ from os import walk
 import pygame
 from csv import reader
 from level_layout import tile_size
-'''
+
 def import_folder(path):
     surface_list = []
 
@@ -14,7 +14,7 @@ def import_folder(path):
             surface_list.append(image_surf)
 
     return surface_list
-'''
+
 def import_csv_layout(path):
     
     terrain_map = []
@@ -34,7 +34,7 @@ def import_cut_graphics(path):
         for col in range(tile_num_x):
             x = col * tile_size
             y = row * tile_size
-            new_surf = pygame.Surface((tile_size, tile_size))
+            new_surf = pygame.Surface((tile_size, tile_size),flags = pygame.SRCALPHA)
             new_surf.blit(surface,(0,0),pygame.Rect(x,y,tile_size, tile_size))
             cut_tiles.append(new_surf)
 
