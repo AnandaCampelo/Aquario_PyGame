@@ -1,6 +1,6 @@
 import pygame
 from animations import import_folder
-from level_layout import screen_height,screen_width,tile_size,vertical_tile_number
+from level_layout import screen_height,screen_width,tile_size,vertical_tile_number, levels
 
 #classe para os blocos
 class Tile(pygame.sprite.Sprite):
@@ -169,3 +169,19 @@ class Fundo:
         for row in range(vertical_tile_number):
             y = row * tile_size
             surface.blit(self.fundo,(0,y))
+
+class Overworld:
+    def __init__(self,start_level,max_level,surface):
+
+        self.display_surface = surface
+        self.max_level = max_level
+        self.current_level = start_level
+
+        self.setup_nodes()
+
+    def setup_nodes(self):
+        for node_data in levels.values():
+            print(node_data)
+
+    def run(self):
+        pass
