@@ -1,20 +1,24 @@
 import pygame
 from animations import import_folder
+from level_layout import screen_height,screen_width,tile_size,vertical_tile_number
 
 #classe para os blocos
 class Tile(pygame.sprite.Sprite):
-    def __init__(self,pos,size):
+    def __init__(self,size,x,y):
         super().__init__()
         self.image = pygame.Surface((size,size))
-        self.image.fill('grey')
-        self.rect = self.image.get_rect(topleft = pos)
+        self.rect = self.image.get_rect(topleft = (x,y))
+    
+    def update(self,shift):
+        self.rect.x += shift
+
 
     def update(self, x_shift):
         self.rect.x += x_shift
-
+    
 #classe para o jogador
 class Player(pygame.sprite.Sprite):
-    def __init__(self, pos):
+    def __init__(self, pos, surface):
         self.import_character_animation()
         self.frame_index = 0
         self.animation_speed = 0.15
@@ -25,7 +29,7 @@ class Player(pygame.sprite.Sprite):
 
         # movimento do player
         self.direction = pygame.math.Vector2(0,0)
-        self.speed = 3
+        self.speed = 4
         self.gravity = 0.8
         self.jump_speed = -20
 
@@ -109,3 +113,59 @@ class Player(pygame.sprite.Sprite):
         self.get_input()
         self.get_status()
         self.animate()
+
+
+class StaticTile(Tile):
+    def __init__(self,size,x,y,surface):
+        super().__init__(size,x,y)
+        self.image = surface
+
+class AnimatesTile(Tile):
+    def __init__(self, size, x, y, path):
+        super().__init__(size, x, y)
+        self.frames = import_folder(path)
+        self.frame_index = 0
+        self.image = self.frames[self.frame_index]
+
+    def animate(self):
+        self.frame_index += 0.15
+        if self.frame_index >= len(self.frames):
+            self.frame_index = 0
+        self.image = self.frames[int(self.frame_index)]
+
+    def update(self,shift):
+        self.animate()
+        self.rect.x += shift
+
+class Enemy(AnimatesTile):
+    def __init__(self, size, x, y):
+        super().__init__(size, x, y, './graficos/tiles/enemy')
+        self.speed = 3
+
+    def move(self):
+        self.rect.x += self.speed
+
+    def reverse_image(self):
+        if self.speed > 0:
+            self.image = pygame.transform.flip(self.image,True,False)
+    
+    def reverse(self):
+        self.speed *= -1
+
+    def update(self, shift):
+        self.rect.x += shift
+        self.animate()
+        self.move()
+        self.reverse_image()
+
+class Fundo:
+    def __init__(self,horizon):
+        self.horizon = horizon
+
+        self.fundo = pygame.image.load('./graficos/background.png').convert()
+        self.fundo = pygame.transform.scale(self.fundo,(screen_width,tile_size))
+
+    def draw(self,surface):
+        for row in range(vertical_tile_number):
+            y = row * tile_size
+            surface.blit(self.fundo,(0,y))
