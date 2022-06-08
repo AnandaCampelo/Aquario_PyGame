@@ -138,9 +138,20 @@ class Level:
             self.world_shift = 0
             player.speed = 3
 
+    def show_game_over(self):
+        font = pygame.font.SysFont('arial', 30)
+        line1 = font.render(f"Você perdeu!", True, (255, 255, 255))
+        self.surface.blit(line1, (200, 300))
+        pygame.display.flip()
+        
+
+
     def check_death(self):
         if self.player.sprite.rect.top > screen_height:
-            print('you lose')
+            self.show_game_over()
+            self.reset()
+        
+           
     
     def check_win(self):
         if pygame.sprite.spritecollide(self.player.sprite,self.goal,False):
