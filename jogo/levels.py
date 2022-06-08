@@ -143,16 +143,25 @@ class Level:
         line1 = font.render(f"Você perdeu!", True, (255, 255, 255))
         self.surface.blit(line1, (200, 300))
         pygame.display.flip()
-        
-
 
     def check_death(self):
         if self.player.sprite.rect.top > screen_height:
             self.show_game_over()
-            self.reset()
-        
-           
-    
+         
+    def check_enemy_collisions(self):
+        enemy_collisions = pygame.sprite.spritecollide(self.player.sprite,self.enemy_sprites,False)
+
+        if enemy_collisions:
+            for enemy in enemy_collisions:
+                enemy_center = enemy.rect.centery
+                enemy_top = enemy.rect.top
+                player_botton = self.player.sprite.rect.bottom
+                if enemy_top < player_botton < enemy_center and self.player.sprite.direction.y >= 0:
+                    self.player.sprite.direction.y = -15
+                    enemy.kill()
+                else:
+                    self.show_game_over()
+
     def check_win(self):
         if pygame.sprite.spritecollide(self.player.sprite,self.goal,False):
             print('you win!')
@@ -178,8 +187,9 @@ class Level:
         self.goal.update(self.world_shift)
         self.goal.draw(self.display_surface)
 
-        #self.enemy_sprites.update(self.world_shift)
-        #self.enemy_sprites.draw(self.display_surface)
+        self.enemy_sprites.update(self.world_shift)
+        self.enemy_sprites.draw(self.display_surface)
+        self.check_enemy_collisions()
 
         self.check_death()
         self.check_win()
