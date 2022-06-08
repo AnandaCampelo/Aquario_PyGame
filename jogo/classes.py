@@ -170,7 +170,14 @@ class Fundo:
             y = row * tile_size
             surface.blit(self.fundo,(0,y))
 
-'''
+class Node(pygame.sprite.Sprite):
+    def _init_(self,pos):
+        super().__init__()
+        self.image = pygame.Surface((100,80))
+        self.image.fill('red')
+        self.rect = self.image.get_rect(center = pos)
+
+
 class Overworld:
     def __init__(self,start_level,max_level,surface):
 
@@ -181,9 +188,15 @@ class Overworld:
         self.setup_nodes()
 
     def setup_nodes(self):
-        for node_data in levels.values():
-            print(node_data)
+        self.nodes = pygame.sprite.Group()
+
+        for index, node_data in enumerate(levels.values()):
+            if index <= self.max_level:
+                node_sprite = Node(node_data['node_pos'])
+                self.nodes.add(node_sprite)
+
+    def draw_paths(self):
+        pygame.draw.lines(self.display_surface, 'red',False,points,6)
 
     def run(self):
-        pass
-'''
+        self.nodes.draw(self.display_surface)
