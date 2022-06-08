@@ -1,5 +1,5 @@
 import pygame
-from animations import import_folder
+#from animations import import_folder
 
 #classe para os blocos
 class Tile(pygame.sprite.Sprite):
