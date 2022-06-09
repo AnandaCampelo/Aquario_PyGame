@@ -1,18 +1,26 @@
 import pygame
 from classes import Player
 from classes import Tile, StaticTile, AnimatesTile, Enemy, Fundo
-from level_layout import tile_size, screen_width, screen_height
+from level_layout import tile_size, screen_width, screen_height, levels
 from animations import import_csv_layout, import_cut_graphics
 
 class Level:
-    def __init__(self, level_data, surface):
+    def __init__(self,cureent_level,surface,create_overworld):
         self.display_surface = surface
         self.world_shift = 0
+        self.current_x = None
+
+        self.create_overworld = create_overworld
+        self.current_level = cureent_level
+        level_data = levels[self.current_level]
+        self.new_max_level = level_data['unlock']
 
         player_layout = import_csv_layout(level_data['player'])
         self.player = pygame.sprite.GroupSingle()
         self.goal = pygame.sprite.GroupSingle()
         self.player_setup(player_layout)
+
+        #self.change_coins = change_coins
         
         terrain_layout = import_csv_layout(level_data['terreno'])
         self.terrain_sprites = self.create_tile_group(terrain_layout,'terreno')
@@ -68,7 +76,6 @@ class Level:
             for col_index, cell in enumerate(row):
                 x = col_index * tile_size
                 y = row_index * tile_size
-                
                 if cell == '0':
                     sprite = Player((x,y),self.display_surface)
                     self.player.add(sprite)
@@ -138,15 +145,9 @@ class Level:
             self.world_shift = 0
             player.speed = 3
 
-    def show_game_over(self):
-        font = pygame.font.SysFont('arial', 30)
-        line1 = font.render(f"Você perdeu!", True, (255, 255, 255))
-        self.surface.blit(line1, (200, 300))
-        pygame.display.flip()
-
     def check_death(self):
         if self.player.sprite.rect.top > screen_height:
-            self.show_game_over()
+            self.create_overworld(self.current_level,0)
          
     def check_enemy_collisions(self):
         enemy_collisions = pygame.sprite.spritecollide(self.player.sprite,self.enemy_sprites,False)
@@ -160,12 +161,18 @@ class Level:
                     self.player.sprite.direction.y = -15
                     enemy.kill()
                 else:
-                    self.show_game_over()
+                    self.create_overworld(self.current_level,0)
 
     def check_win(self):
         if pygame.sprite.spritecollide(self.player.sprite,self.goal,False):
-            print('you win!')
+            self.create_overworld(self.current_level,self.new_max_level)
 
+    #def check_coin_collision(self):
+    #    collided_coins = pygame.sprite.spritecollide(self.player.sprite,self.coin_sprites,True)
+    #    if collided_coins:
+    #        for coin in collided_coins:
+    #            self.change_coins(1)
+    
     def run(self):
 
         #self.fundo.draw(self.display_surface)
@@ -176,8 +183,8 @@ class Level:
         #self.sign_sprites.update(self.world_shift)
         #self.sign_sprites.draw(self.display_surface)
 
-        #self.gold_sprites.update(self.world_shift)
-        #self.gold_sprites.draw(self.display_surface)
+        self.gold_sprites.update(self.world_shift)
+        self.gold_sprites.draw(self.display_surface)
 
         self.player.update()
         self.movimento_horizontal_colisao()
@@ -193,6 +200,8 @@ class Level:
 
         self.check_death()
         self.check_win()
+
+        #self.check_coin_collision()
 
         self.constraint_sprites.update(self.world_shift)
         self.enemy_collision_reverse()
