@@ -74,7 +74,6 @@ class Level:
             for col_index, cell in enumerate(row):
                 x = col_index * tile_size
                 y = row_index * tile_size
-                
                 if cell == '0':
                     sprite = Player((x,y),self.display_surface)
                     self.player.add(sprite)
@@ -144,15 +143,9 @@ class Level:
             self.world_shift = 0
             player.speed = 3
 
-    def show_game_over(self):
-        font = pygame.font.SysFont('arial', 30)
-        line1 = font.render(f"Você perdeu!", True, (255, 255, 255))
-        self.surface.blit(line1, (200, 300))
-        pygame.display.flip()
-
     def check_death(self):
         if self.player.sprite.rect.top > screen_height:
-            self.show_game_over()
+            self.create_overworld(self.current_level,0)
          
     def check_enemy_collisions(self):
         enemy_collisions = pygame.sprite.spritecollide(self.player.sprite,self.enemy_sprites,False)
@@ -166,11 +159,11 @@ class Level:
                     self.player.sprite.direction.y = -15
                     enemy.kill()
                 else:
-                    self.show_game_over()
+                    self.create_overworld(self.current_level,0)
 
     def check_win(self):
         if pygame.sprite.spritecollide(self.player.sprite,self.goal,False):
-            print('you win!')
+            self.create_overworld(self.current_level,self.new_max_level)
 
     def run(self):
 

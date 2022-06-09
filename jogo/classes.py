@@ -175,9 +175,11 @@ class Node(pygame.sprite.Sprite):
         super().__init__()
         self.image = pygame.Surface((100,80))
         if status == 'available':
-            self.image.fill('red')
+            self.image = pygame.image.load('./graficos/open.png').convert_alpha()
+            self.rect = self.image.get_rect(center = pos)
         else:
-            self.image.fill('grey')
+            self.image = pygame.image.load('./graficos/closed.png').convert_alpha()
+            self.rect = self.image.get_rect(center = pos)
         self.rect = self.image.get_rect(center = pos)
 
         self.detection_zone = pygame.Rect(self.rect.centerx - (icon_speed / 2),self.rect.centery - (icon_speed / 2),icon_speed,icon_speed)
@@ -186,8 +188,7 @@ class Icon(pygame.sprite.Sprite):
     def __init__(self,pos):
         super().__init__()
         self.pos = pos
-        self.image = pygame.Surface((20,20))
-        self.image.fill('blue')
+        self.image = pygame.image.load('./graficos/fox.png').convert_alpha()
         self.rect = self.image.get_rect(center = pos)
 
     def update(self):
@@ -219,9 +220,9 @@ class Overworld:
                 node_sprite = Node(node_data['node_pos'],'locked',self.speed)
             self.nodes.add(node_sprite)
     
-    def draw_paths(self):
-        points = [node['node_pos'] for index,node in enumerate(levels.values()) if index <= self.max_level]
-        pygame.draw.lines(self.display_surface,'red',False,points,6)
+    # def draw_paths(self):
+    #     points = [node['node_pos'] for index,node in enumerate(levels.values()) if index <= self.max_level]
+    #     pygame.draw.lines(self.display_surface,'red',False,points,6)
 
     def setup_icon(self):
         self.icon = pygame.sprite.GroupSingle()
@@ -266,6 +267,6 @@ class Overworld:
         self.input()
         self.update_icon_pos()
         self.icon.update()
-        self.draw_paths()
+        #self.draw_paths()
         self.nodes.draw(self.display_surface)
         self.icon.draw(self.display_surface)

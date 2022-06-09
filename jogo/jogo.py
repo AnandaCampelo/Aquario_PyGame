@@ -6,8 +6,8 @@ from levels import Level
 
 class Game:
     def __init__(self):
-        self.max_level = 1
-        self.overworld = Overworld(1,self.max_level,screen,self.create_level)
+        self.max_level = 0
+        self.overworld = Overworld(0,self.max_level,screen,self.create_level)
         self.status = 'overworld'
     
     def create_level(self, current_level):
@@ -38,7 +38,7 @@ while True:
             pygame.quit()
             sys.exit()
     
-    screen.fill('black')
+    screen.fill('grey')
     game.run()
 
     pygame.display.update()
