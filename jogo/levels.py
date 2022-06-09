@@ -5,7 +5,7 @@ from level_layout import tile_size, screen_width, screen_height, levels
 from animations import import_csv_layout, import_cut_graphics
 
 class Level:
-    def __init__(self,cureent_level,surface,create_overworld,change_coins):
+    def __init__(self,cureent_level,surface,create_overworld):
         self.display_surface = surface
         self.world_shift = 0
         self.current_x = None
@@ -19,8 +19,6 @@ class Level:
         self.player = pygame.sprite.GroupSingle()
         self.goal = pygame.sprite.GroupSingle()
         self.player_setup(player_layout)
-
-        self.change_coins = change_coins
         
         terrain_layout = import_csv_layout(level_data['terreno'])
         self.terrain_sprites = self.create_tile_group(terrain_layout,'terreno')
@@ -79,7 +77,7 @@ class Level:
                 if cell == '0':
                     sprite = Player((x,y),self.display_surface)
                     self.player.add(sprite)
-                if cell == '2':
+                if cell == '1':
                     bigode = pygame.image.load('./graficos/win.png').convert_alpha()
                     sprite = StaticTile(tile_size,x,y,bigode)
                     self.goal.add(sprite)
@@ -151,6 +149,7 @@ class Level:
          
     def check_enemy_collisions(self):
         enemy_collisions = pygame.sprite.spritecollide(self.player.sprite,self.enemy_sprites,False)
+
         if enemy_collisions:
             for enemy in enemy_collisions:
                 enemy_center = enemy.rect.centery
@@ -166,12 +165,6 @@ class Level:
         if pygame.sprite.spritecollide(self.player.sprite,self.goal,False):
             self.create_overworld(self.current_level,self.new_max_level)
 
-    def check_coin_collision(self):
-        collided_coins = pygame.sprite.spritecollide(self.player.sprite,self.gold_sprites,True)
-        if collided_coins:
-            for coin in collided_coins:
-                self.change_coins(1)
-    
     def run(self):
 
         #self.fundo.draw(self.display_surface)
@@ -182,8 +175,8 @@ class Level:
         #self.sign_sprites.update(self.world_shift)
         #self.sign_sprites.draw(self.display_surface)
 
-        self.gold_sprites.update(self.world_shift)
-        self.gold_sprites.draw(self.display_surface)
+        #self.gold_sprites.update(self.world_shift)
+        #self.gold_sprites.draw(self.display_surface)
 
         self.player.update()
         self.movimento_horizontal_colisao()
@@ -199,8 +192,6 @@ class Level:
 
         self.check_death()
         self.check_win()
-
-        self.check_coin_collision()
 
         self.constraint_sprites.update(self.world_shift)
         self.enemy_collision_reverse()
