@@ -6,16 +6,16 @@ from levels import Level
 
 class Game:
     def __init__(self):
-        self.max_level = 0
+        self.max_level = 2
         self.coins = 0
         
         self.overworld = Overworld(0,self.max_level,screen,self.create_level)
         self.status = 'overworld'
 
-        self.ui = UI
+        self.ui = UI(screen)
     
     def create_level(self, current_level):
-        self.level = Level(current_level,screen,self.create_overworld)
+        self.level = Level(current_level,screen,self.create_overworld, self.change_coins)
         self.status = 'level'
 
     def create_overworld(self, current_level, new_max_level):
@@ -27,12 +27,27 @@ class Game:
     def change_coins(self,amount):
         self.coins += amount
 
+    def change_level(self):
+        if self.coins == 23 and self.max_level == 0:
+            self.coins = 0
+            self.max_level = 1
+            self.overworld = Overworld(0,self.max_level,screen,self.create_level)
+            self.status = 'overworld'
+        elif self.coins == 17 and self.max_level == 1:
+            self.coins = 0
+            self.max_level = 2
+            self.overworld = Overworld(0,self.max_level,screen,self.create_level)
+            self.status = 'overworld'
+        elif self.coins == 15 and self.max_level == 2:
+            print('Você Ganhou!!!')
+
     def run(self):
         if self.status == 'overworld':
             self.overworld.run()
         else:
             self.level.run()
-            self.ui.show_coins(0,12)
+            self.ui.show_coins(self.coins)
+            self.change_level()
 
 pygame.init()
 
