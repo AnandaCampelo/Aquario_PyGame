@@ -270,15 +270,3 @@ class Overworld:
         #self.draw_paths()
         self.nodes.draw(self.display_surface)
         self.icon.draw(self.display_surface)
-
-
-class UI:
-    def __init__(self,surface):
-        self.display_surface = surface
-
-        self.coin = pygame.image.load('./graficos/tiles/ouro/pixil-frame-0 (33)')
-        self.coin_rect = self.coin.get_rect(topleft = (20,10))
-
-
-    def show_coins(self,amount):
-        self.display_surface.blit(self.coin,self.coin_rect)
