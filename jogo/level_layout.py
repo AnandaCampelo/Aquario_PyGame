@@ -9,8 +9,11 @@ level_0 = {
     'enemy' : './graficos/level0/level 0 layout_enemy.csv',
     'ouro' : './graficos/level0/level 0 layout_ouro.csv',
     'placas' : './graficos/level0/level 0 layout_placas.csv',
-    'player' : './graficos/level0/level 0 layout_player.csv'
-}
+    'player' : './graficos/level0/level 0 layout_player.csv',
+    'node_pos':(300,350),
+    'unlock' : 1,
+    'node_graphics': './graficos/overworld.png'
+    }
 
 level_1 = {
     'terreno' : './graficos/level1/level 1 layout_terreno.csv',
@@ -18,7 +21,10 @@ level_1 = {
     'enemy' : './graficos/level1/level 1 layout_enemy.csv',
     'ouro' : './graficos/level1/level 1 layout_ouro.csv',
     'placas' : './graficos/level1/level 1 layout_placas.csv',
-    'player' : './graficos/level1/level 1 layout_player.csv'
+    'player' : './graficos/level1/level 1 layout_player.csv',
+    'node_pos':(600,350),
+    'unlock' : 2,
+    'node_graphics': './graficos/overworld'
 }
 
 level_2 = {
@@ -27,7 +33,10 @@ level_2 = {
     'enemy' : './graficos/level2/level 2 layout_enemy.csv',
     'ouro' : './graficos/level2/level 2 layout_ouro.csv',
     'placas' : './graficos/level2/level 2 layout_placas.csv',
-    'player' : './graficos/level2/level 2 layout_player.csv'
+    'player' : './graficos/level2/level 2 layout_player.csv',
+    'node_pos':(900,350),
+    'unlock' : 3,
+    'node_graphics': './graficos/overworld'
 }
 
 
@@ -36,7 +45,7 @@ level_1_key = {'node_pos':(600,350),'content': 'this is level 1', 'unlock':2}
 level_2_key = {'node_pos':(900,350),'content': 'this is level 2', 'unlock':3}
 
 levels = {
-    0: level_0_key,
-    1: level_1_key,
-    2: level_2_key
+    0: level_0,
+    1: level_1,
+    2: level_2
 }

@@ -175,9 +175,9 @@ class Node(pygame.sprite.Sprite):
         super().__init__()
         self.image = pygame.Surface((100,80))
         if status == 'available':
-            self.image.fill('black')
-        else:
             self.image.fill('red')
+        else:
+            self.image.fill('grey')
         self.rect = self.image.get_rect(center = pos)
 
         self.detection_zone = pygame.Rect(self.rect.centerx - (icon_speed / 2),self.rect.centery - (icon_speed / 2),icon_speed,icon_speed)
@@ -194,11 +194,12 @@ class Icon(pygame.sprite.Sprite):
         self.rect.center = self.pos
 
 class Overworld:
-    def __init__(self,start_level,max_level,surface):
+    def __init__(self,start_level,max_level,surface,create_level):
 
         self.display_surface = surface
         self.max_level = max_level
         self.current_level = start_level
+        self.create_level = create_level
 
         self.moving = False
         self.move_direction = pygame.math.Vector2(0,0)
@@ -220,7 +221,7 @@ class Overworld:
     
     def draw_paths(self):
         points = [node['node_pos'] for index,node in enumerate(levels.values()) if index <= self.max_level]
-        pygame.draw.lines(self.display_surface,'black',False,points,6)
+        pygame.draw.lines(self.display_surface,'red',False,points,6)
 
     def setup_icon(self):
         self.icon = pygame.sprite.GroupSingle()
@@ -239,6 +240,8 @@ class Overworld:
                 self.move_direction = self.get_movement_data('previous')
                 self.current_level -=1
                 self.moving = True
+            elif keys[pygame.K_SPACE]:
+                self.create_level(self.current_level)
 
     def get_movement_data(self,target):
         start = pygame.math.Vector2(self.nodes.sprites()[self.current_level].rect.center)

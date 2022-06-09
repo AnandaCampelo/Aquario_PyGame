@@ -1,13 +1,19 @@
 import pygame
 from classes import Player
 from classes import Tile, StaticTile, AnimatesTile, Enemy, Fundo
-from level_layout import tile_size, screen_width, screen_height
+from level_layout import tile_size, screen_width, screen_height, levels
 from animations import import_csv_layout, import_cut_graphics
 
 class Level:
-    def __init__(self, level_data, surface):
+    def __init__(self,cureent_level,surface,create_overworld):
         self.display_surface = surface
         self.world_shift = 0
+        self.current_x = None
+
+        self.create_overworld = create_overworld
+        self.current_level = cureent_level
+        level_data = levels[self.current_level]
+        self.new_max_level = level_data['unlock']
 
         player_layout = import_csv_layout(level_data['player'])
         self.player = pygame.sprite.GroupSingle()
