@@ -31,8 +31,12 @@ level_2 = {
 }
 
 
-level_00 = {'node_pos':(110,400),'content': 'this is level 0', 'unlock':1}
+level_0_key = {'node_pos':(300,350),'content': 'this is level 0', 'unlock':1}
+level_1_key = {'node_pos':(600,350),'content': 'this is level 1', 'unlock':2}
+level_2_key = {'node_pos':(900,350),'content': 'this is level 2', 'unlock':3}
 
 levels = {
-    0: level_1
+    0: level_0_key,
+    1: level_1_key,
+    2: level_2_key
 }
