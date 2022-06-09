@@ -1,12 +1,12 @@
 import pygame, sys
 from level_layout import *
-from classes import Tile,Overworld, UI
+from classes import Tile,Overworld,UI
 from levels import Level
 
 
 class Game:
     def __init__(self):
-        self.max_level = 2
+        self.max_level = 0
         self.coins = 0
         
         self.overworld = Overworld(0,self.max_level,screen,self.create_level)
