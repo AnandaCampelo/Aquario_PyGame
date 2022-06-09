@@ -77,7 +77,7 @@ class Level:
                 if cell == '0':
                     sprite = Player((x,y),self.display_surface)
                     self.player.add(sprite)
-                if cell == '1':
+                if cell == '2':
                     bigode = pygame.image.load('./graficos/win.png').convert_alpha()
                     sprite = StaticTile(tile_size,x,y,bigode)
                     self.goal.add(sprite)
@@ -149,7 +149,6 @@ class Level:
          
     def check_enemy_collisions(self):
         enemy_collisions = pygame.sprite.spritecollide(self.player.sprite,self.enemy_sprites,False)
-
         if enemy_collisions:
             for enemy in enemy_collisions:
                 enemy_center = enemy.rect.centery
